@@ -15,10 +15,12 @@ A quickstart project demonstrating Better Auth integration with Express.js, Post
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v18 or higher)
+- **Node.js** (v20.0.0 or higher) - Required for dependencies like `better-auth`, `better-sqlite3`, `kysely`, and others
 - **npm** or **yarn**
 - **Docker** and **Docker Compose**
 - **Git**
+
+> **Note:** This project includes a `.nvmrc` file. If you're using `nvm`, run `nvm use` in the project directory to automatically switch to the correct Node.js version.
 
 ## Getting Started
 
@@ -29,13 +31,32 @@ git clone <your-repo-url>
 cd better-auth-quickstart
 ```
 
-### 2. Install Dependencies
+### 2. Set Up Node.js Version
+
+Ensure you're using Node.js v20 or higher:
+
+```bash
+# If using nvm (recommended)
+nvm use
+
+# Or verify your Node.js version
+node --version  # Should be v20.0.0 or higher
+```
+
+If you don't have Node.js v20 installed:
+```bash
+# Install Node.js 20 LTS
+nvm install 20
+nvm use 20
+```
+
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Set Up Environment Variables
+### 4. Set Up Environment Variables
 
 You need a `.env` file in the root directory. If you don't have one, create it:
 
@@ -57,7 +78,7 @@ DATABASE_URL="postgresql://username:password@localhost:5432/better_auth_db?schem
 **Quick Setup:**
 - Replace `DATABASE_URL` with your PostgreSQL connection string
 
-### 4. Set Up the Database
+### 5. Set Up the Database
 
 Start PostgreSQL with Docker Compose:
 
@@ -86,7 +107,7 @@ npm run prisma:generate
 npm run prisma:migrate
 ```
 
-### 5. Start the Development Server
+### 6. Start the Development Server
 
 ```bash
 npm run dev
@@ -197,6 +218,21 @@ docker-compose ps
 ```
 
 ## Troubleshooting
+
+### Node.js Version Issues
+
+If you encounter `EBADENGINE` warnings or "heap out of memory" errors during `npm install`:
+
+- **Error:** `Unsupported engine` warnings for packages like `@noble/ciphers`, `better-sqlite3`, `kysely`, etc.
+- **Solution:** Upgrade to Node.js v20 or higher:
+  ```bash
+  nvm install 20
+  nvm use 20
+  npm install
+  ```
+
+- **Error:** `FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory`
+- **Solution:** This often occurs when using Node.js v18 with dependencies that require v20+. Upgrade Node.js as shown above.
 
 ### Database Connection Issues
 
