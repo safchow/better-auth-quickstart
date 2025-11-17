@@ -1,0 +1,68 @@
+meta {
+  name: Sign Up
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/api/auth/sign-up/email
+  body: json
+  auth: none
+}
+
+headers {
+  Origin: {{client_url}}
+}
+
+body:json {
+  {
+    "email": "{{test_email}}",
+    "password": "{{test_password}}",
+    "name": "{{test_name}}"
+  }
+}
+
+params:query {
+}
+
+docs {
+  # Sign Up
+
+  Register a new user account with email and password.
+
+  **Endpoint:** `POST /api/auth/sign-up/email`
+
+  ## Request Body
+
+  - `email` (string, required): User's email address
+  - `password` (string, required): User's password
+  - `name` (string, required): User's full name
+
+  ## Response
+
+  Returns the created user and session information. Session cookie is automatically set.
+
+  ## Example Response
+
+  ```json
+  {
+    "user": {
+      "id": "user_123",
+      "email": "[email protected]",
+      "name": "John Doe",
+      "emailVerified": false
+    },
+    "session": {
+      "id": "session_123",
+      "token": "...",
+      "expiresAt": "2024-01-08T00:00:00Z"
+    }
+  }
+  ```
+
+  ## Notes
+
+  - Session cookie is automatically set in response
+  - User is automatically logged in after registration
+  - Sessions last 7 days by default
+}

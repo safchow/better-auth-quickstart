@@ -1,0 +1,7 @@
+vars {
+  base_url: http://localhost:8080
+  client_url: http://localhost:5173
+  test_email: [email protected]
+  test_password: TestPassword123!
+  test_name: Test User
+}

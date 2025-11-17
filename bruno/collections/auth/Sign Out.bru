@@ -1,0 +1,53 @@
+meta {
+  name: Sign Out
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/auth/sign-out
+  body: none
+  auth: none
+}
+
+headers {
+  Origin: {{client_url}}
+}
+
+params:query {
+}
+
+docs {
+  # Sign Out
+
+  Sign out the currently authenticated user and invalidate their session.
+
+  **Endpoint:** `POST /api/auth/sign-out`
+
+  ## Authentication
+
+  This endpoint requires a valid session cookie to be present in the request.
+
+  ## Response
+
+  Returns a success message indicating the user has been signed out.
+
+  ## Behavior
+
+  - Deletes the session from the database
+  - Removes the session cookie from the browser
+  - User must re-authenticate to access protected routes
+
+  ## Example Response
+
+  ```json
+  {
+    "success": true,
+    "message": "Signed out successfully"
+  }
+  ```
+
+  ## Error Responses
+
+  - `401`: No active session found
+}

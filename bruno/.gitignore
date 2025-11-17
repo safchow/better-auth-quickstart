@@ -1,0 +1,5 @@
+# Bruno cache/metadata (local to each developer)
+.bruno/
+
+# Local environment (user-specific, may contain secrets)
+environments/local.bru

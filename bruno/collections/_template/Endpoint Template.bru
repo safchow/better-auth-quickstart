@@ -1,0 +1,60 @@
+meta {
+  name: Endpoint Name
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{base_url}}/api/endpoint
+  body: none
+  auth: none
+}
+
+params:query {
+  param1: value1
+}
+
+headers {
+  Origin: {{client_url}}
+}
+
+body:json {
+  {
+    "key": "value"
+  }
+}
+
+docs {
+  # Endpoint Name
+
+  Description of what this endpoint does.
+
+  **Endpoint:** `GET /api/endpoint`
+
+  ## Request Parameters
+
+  - `param1` (string, optional): Description of parameter
+
+  ## Request Body
+
+  - `key` (string, required): Description of field
+
+  ## Response
+
+  Describe the response structure.
+
+  ## Example Response
+
+  ```json
+  {
+    "data": "example"
+  }
+  ```
+
+  ## Error Responses
+
+  - `400`: Bad request
+  - `401`: Unauthorized
+  - `404`: Not found
+  - `500`: Internal server error
+}
