@@ -67,16 +67,25 @@ touch .env
 
 **Required Environment Variables:**
 
-Add these to your `.env` file (minimum required to run):
+Add these to your `.env` file:
 
 ```env
-# Required: Database connection
-DATABASE_URL="postgresql://username:password@localhost:5432/better_auth_db?schema=public"
+# Database connection
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/better_auth_db?schema=public"
 
+# Better Auth Configuration
+BETTER_AUTH_BASE_URL="http://localhost:8080"
+CLIENT_URL="http://localhost:5173"
+
+# Server Configuration (optional)
+PORT=8080
+NODE_ENV="development"
 ```
 
 **Quick Setup:**
-- Replace `DATABASE_URL` with your PostgreSQL connection string
+- `DATABASE_URL`: Use the connection string matching your Docker Compose setup (shown above)
+- `BETTER_AUTH_BASE_URL`: The base URL where your API server runs
+- `CLIENT_URL`: The URL of your frontend application
 
 ### 5. Set Up the Database
 
@@ -97,13 +106,13 @@ Make sure your `.env` file has:
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/better_auth_db?schema=public"
 ```
 
-Run Prisma migrations to set up the database schema:
+Apply Prisma migrations to set up the database schema:
 
 ```bash
 # Generate Prisma Client
 npm run prisma:generate
 
-# Run migrations
+# Apply migrations
 npm run prisma:migrate
 ```
 
@@ -128,9 +137,9 @@ You should see:
 - `npm run build` - Build the project for production
 - `npm start` - Start production server
 - `npm run prisma:generate` - Generate Prisma Client
-- `npm run prisma:migrate` - Run database migrations
+- `npm run prisma:migrate` - Apply database migrations
 - `npm run prisma:studio` - Open Prisma Studio (database GUI)
-- `npm run prisma:migrate:deploy` - Deploy migrations (production)
+- `npm run prisma:migrate:deploy` - Apply migrations (same as prisma:migrate)
 - `npm run prisma:migrate:reset` - Reset database (⚠️ deletes all data)
 - `npm run format` - Format code with Prettier
 - `npm run lint` - Lint code with ESLint
@@ -242,7 +251,6 @@ If you encounter `EBADENGINE` warnings or "heap out of memory" errors during `np
 
 ### Better Auth Errors
 
-- Ensure `BETTER_AUTH_SECRET` is set and at least 32 characters
 - Verify `CLIENT_URL` matches your frontend URL
 - Check CORS settings if making requests from a frontend
 

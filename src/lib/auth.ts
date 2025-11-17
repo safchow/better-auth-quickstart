@@ -16,7 +16,6 @@ export const auth = betterAuth({
     // Refresh session if user was active within last day
     updateAge: 60 * 60 * 24, // 1 day
   },
-  secret: config.betterAuthSecret,
   baseURL: config.betterAuthBaseURL || `http://localhost:${config.port}`,
   basePath: "/api/auth",
   // Trusted origins: only the frontend client URL
