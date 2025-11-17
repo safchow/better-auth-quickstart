@@ -1,6 +1,12 @@
+import "dotenv/config";
+import { webcrypto } from "crypto";
+// Ensure crypto is available globally for Better Auth
+if (typeof globalThis.crypto === "undefined") {
+  globalThis.crypto = webcrypto as any;
+}
+
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import "dotenv/config";
 import express, { json, urlencoded } from "express";
 import { toNodeHandler } from "better-auth/node";
 import config from "@/config/default.js";
